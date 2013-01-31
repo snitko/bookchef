@@ -1,0 +1,5 @@
+<section>
+  <title>Some section</title>
+  <p>hello world</p>
+  <section src="subsection.xml">Subsection title</section>
+</section>

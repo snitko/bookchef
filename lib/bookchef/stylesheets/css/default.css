@@ -1,0 +1,70 @@
+body {
+  font-family: "Times New Roman";
+  font-size: 18px; }
+
+code, .code.inline {
+  font-family: "Monaco";
+  font-size: 14px;
+  background-color: #eee; }
+
+code {
+  display: block;
+  clear: both;
+  margin: 1em 0;
+  padding: 0.5em 0;
+  white-space: pre; }
+
+.footnotes {
+  font-size: 80%;
+  margin: 1em;
+  border: dotted 1px #aaaaaa;
+  padding: 1em 1em 0 1em; }
+  .footnotes .footnote {
+    margin-bottom: 1em; }
+
+.references {
+  font-style: italic;
+  font-size: 80%;
+  margin: 1em;
+  border: dotted 1px #aaaaaa;
+  padding: 1em 1em 0 1em; }
+  .references img {
+    margin-right: 5px;
+    margin-bottom: -3px; }
+  .references .reference {
+    margin-bottom: 1em; }
+
+p {
+  margin: 0 0 0 0;
+  text-indent: 1em; }
+
+.section h1 {
+  font-size: 270%; }
+.section .section h1 {
+  font-size: 220%; }
+.section .section .section h1 {
+  font-size: 190%; }
+.section .section .section .section h1 {
+  font-size: 170%; }
+.section .section .section .section .section h1 {
+  font-size: 140%; }
+.section .section .section .section .section .section h1 {
+  font-size: 125%; }
+
+.table {
+  margin: 1.5em 1em; }
+  .table table {
+    border-collapse: collapse; }
+    .table table td, .table table th {
+      border: solid 1px #aaaaaa;
+      padding: 0.5em;
+      font-size: 90%;
+      margin-top: 1.5em; }
+  .table p.tableDescription {
+    font-style: italic;
+    font-size: 80%;
+    margin-top: 0.5em;
+    text-indent: 0px; }
+
+ul li, ol li {
+  margin: 0.5em 0; }

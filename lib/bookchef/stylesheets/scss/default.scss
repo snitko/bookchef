@@ -1,0 +1,57 @@
+body { font-family: "Times New Roman"; font-size: 18px; }
+
+code, .code.inline { font-family: "Monaco"; font-size: 14px; background-color: #eee; }
+code { display: block; clear: both; margin: 1em 0; padding: 0.5em 0; white-space: pre; }
+
+@mixin end_of_section_block_container {
+  font-size: 80%; margin: 1em; border: dotted 1px #aaa; padding: 1em 1em 0 1em;
+}
+@mixin end_of_section_block {
+  margin-bottom: 1em;
+}
+
+.footnotes  {
+  @include end_of_section_block_container;
+  .footnote { @include end_of_section_block; }
+}
+.references {
+  font-style: italic; @include end_of_section_block_container;
+  img { margin-right: 5px; margin-bottom: -3px; }
+  .reference { @include end_of_section_block; }
+}
+
+
+p { margin: 0 0 0 0; text-indent: 1em }
+
+.section {
+  h1 { font-size: 270%; }
+  .section {
+    h1 { font-size: 220%; }
+    .section {
+      h1 { font-size: 190%; }
+      .section {
+        h1 { font-size: 170%; }
+        .section {
+          h1 { font-size: 140%; }
+          .section {
+            h1 { font-size: 125%; }
+          }
+        }
+      }
+    }
+  }
+}
+
+.table {
+  margin: 1.5em 1em;
+  table {
+    border-collapse: collapse;
+    td, th { border: solid 1px #aaa; padding: 0.5em; font-size: 90%; margin-top: 1.5em; }
+  }
+  p.tableDescription { font-style: italic; font-size: 80%; margin-top: 0.5em; text-indent: 0px; }
+
+}
+
+ul, ol {
+  li { margin: 0.5em 0; }
+}
