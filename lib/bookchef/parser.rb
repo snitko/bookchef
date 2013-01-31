@@ -9,6 +9,8 @@ class BookChef
     # Outputs one single file merged out of all source files.
     class TreeMerger
 
+      class LinkLevelOutOfReach < Exception; end
+
       def initialize(path, fn)
         @path     = path
         @filename = fn
@@ -29,9 +31,10 @@ class BookChef
 
         def process_level(level_document, current_path="")
           sourced_sections = level_document.xpath('//section[@src]')
+          convert_links!(level_document, current_path)
           unless sourced_sections.empty?
             sourced_sections.each do |s|
-              current_fn        = file_name_or_index(s[:src])
+              current_fn        = filename_or_index(s[:src])
               current_dir       = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
               current_path      += "/#{current_dir}" unless current_dir.empty?
               full_current_path = "#{current_path}/#{current_fn}"
@@ -51,12 +54,21 @@ class BookChef
           return level_document
         end
 
-        def convert_links(document, current_path)
+        # Conver links 'href' attr from relative to absolute path
+        # according to the sections 'name' attrs.
+        def convert_links!(document, current_path)
           document.search("a").each do |link|
-            uplevels_count = link[:href].match("../").size
-            path_arr = current_path.split("/")
-            new_path = path_arr[uplevels_count..path_arr.size-1].join("/")
-            link[:href] = new_path
+            path_arr = link[:href].split("/")
+            uplevels_count = (path_arr.map { |i| i if i == ".." }).compact.size
+            
+            if uplevels_count >= current_path.split("/").size
+              raise LinkLevelOutOfReach, "for link #{link.to_s} in \"#{current_path}\""
+            end
+
+            path_arr.delete_at(-1) if path_arr[-1] =~ /\.xml\Z/
+            new_path    =  path_arr[uplevels_count..path_arr.size-1].join("/")
+            new_path    += "/" unless new_path.empty?
+            link[:href] =  "/" + new_path + filename_or_index(link[:href])
           end
         end
 
@@ -66,8 +78,8 @@ class BookChef
           node.remove_attribute("src")
         end
 
-        def filename_or_index(fn)
-          (fn.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
+        def filename_or_index(path)
+          (path.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
         end
       
     end

@@ -5,8 +5,9 @@
     <p>hello world</p>
     <section name="/section1/subsection.xml">
       <title>Subsection title</title>
+      <a href="/main.xml">Link to the root</a>
       <a href="/hello/index.xml">Link to the root</a>
-      <a href="/hello/index.xml">Link to the root</a>
+      <a href="/hello/world.xml">Link to the root</a>
     </section>
 
   </section>

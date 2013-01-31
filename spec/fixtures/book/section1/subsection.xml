@@ -1,5 +1,6 @@
 <section>
   <title>Subsection title</title>
+  <a href="../main.xml">Link to the root</a>
   <a href="../hello/">Link to the root</a>
-  <a href="../hello">Link to the root</a>
+  <a href="../hello/world.xml">Link to the root</a>
 </section>
