@@ -31,12 +31,15 @@ class BookChef
           sourced_sections = level_document.xpath('//section[@src]')
           unless sourced_sections.empty?
             sourced_sections.each do |s|
-              current_fn   = (s[:src].match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
-              current_dir  = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
-              current_path += "/#{current_dir}" unless current_dir.empty?
+              current_fn        = file_name_or_index(s[:src])
+              current_dir       = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
+              current_path      += "/#{current_dir}" unless current_dir.empty?
+              full_current_path = "#{current_path}/#{current_fn}"
+
+              assign_name_to_section!(s, full_current_path)
               
               # Parse the sourced file
-              sourced_document = Nokogiri::XML.parse(File.new("#@path#{current_path}/#{current_fn}"))
+              sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
 
               # Now process it too, replacing all src-s with xml from sourced files
               sourced_document = process_level(sourced_document, current_path)
@@ -46,6 +49,25 @@ class BookChef
             end
           end
           return level_document
+        end
+
+        def convert_links(document, current_path)
+          document.search("a").each do |link|
+            uplevels_count = link[:href].match("../").size
+            path_arr = current_path.split("/")
+            new_path = path_arr[uplevels_count..path_arr.size-1].join("/")
+            link[:href] = new_path
+          end
+        end
+
+        # Sets section name like this: <section name="/section1/subsection_a/intro.xml">
+        def assign_name_to_section!(node, full_current_path)
+          node[:name] = full_current_path
+          node.remove_attribute("src")
+        end
+
+        def filename_or_index(fn)
+          (fn.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
         end
       
     end

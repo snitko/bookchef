@@ -1,10 +1,12 @@
 <book>
-  <section src="section1">
+  <section name="/section1/index.xml">
 
     <title>Some section</title>
     <p>hello world</p>
-    <section src="subsection.xml">
+    <section name="/section1/subsection.xml">
       <title>Subsection title</title>
+      <a href="/hello/index.xml">Link to the root</a>
+      <a href="/hello/index.xml">Link to the root</a>
     </section>
 
   </section>
