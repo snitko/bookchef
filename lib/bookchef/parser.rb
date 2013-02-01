@@ -41,10 +41,11 @@ class BookChef
             full_current_path = "#{path}/#{current_fn}"
             
             puts "processing #{full_current_path}" 
-            assign_name_to_section!(s, full_current_path)
+            assign_name_to_section! s, full_current_path
             
             # Parse the sourced file
             sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
+            convert_references_and_footnotes! sourced_document, full_current_path
 
             # Now process it too, replacing all src-s with xml from sourced files
             sourced_document = process_level(sourced_document, path)
@@ -72,6 +73,15 @@ class BookChef
             new_path    =  path_arr[uplevels_count..path_arr.size-1].join("/")
             new_path    += "/" unless new_path.empty?
             link[:href] =  "/" + new_path + filename_or_index(link[:href])
+          end
+        end
+
+        def convert_references_and_footnotes!(document, current_path)
+          document.search("//footnote|//reference").each do |node|
+            node[:id] = current_path + "/#{node.name}_#{node[:id]}"
+          end
+          document.search("//@footnote|//@reference").each do |node|
+            node.parent[node.name] = current_path + "/#{node.name}_#{node.value}"
           end
         end
 
