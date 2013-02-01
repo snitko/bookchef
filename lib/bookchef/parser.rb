@@ -32,25 +32,27 @@ class BookChef
         def process_level(level_document, current_path="")
           sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
           convert_links!(level_document, current_path)
-          unless sourced_sections.empty?
-            sourced_sections.each do |s|
-              current_fn        = filename_or_index(s[:src])
-              current_dir       = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
-              current_path      += "/#{current_dir}" unless current_dir.empty?
-              full_current_path = "#{current_path}/#{current_fn}"
+          
+          sourced_sections.each do |s|
+            current_fn        = filename_or_index(s[:src])
+            current_dir       = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
+            path = current_path
+            path              += "/#{current_dir}" unless current_dir.empty?
+            full_current_path = "#{path}/#{current_fn}"
+            
+            puts "processing #{full_current_path}" 
+            assign_name_to_section!(s, full_current_path)
+            
+            # Parse the sourced file
+            sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
 
-              assign_name_to_section!(s, full_current_path)
-              
-              # Parse the sourced file
-              sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
+            # Now process it too, replacing all src-s with xml from sourced files
+            sourced_document = process_level(sourced_document, path)
 
-              # Now process it too, replacing all src-s with xml from sourced files
-              sourced_document = process_level(sourced_document, current_path)
+            # replace the contents of the tag with the actual sourced file
+            s.children = sourced_document.root.children
+          end unless sourced_sections.empty?
 
-              # replace the contents of the tag with the actual sourced file
-              s.children = sourced_document.root.children
-            end
-          end
           return level_document
         end
 
@@ -58,6 +60,7 @@ class BookChef
         # according to the sections 'name' attrs.
         def convert_links!(document, current_path)
           document.search("a").each do |link|
+            next if link[:href].nil? || link[:href] =~ /\Ahttp:\/\//
             path_arr = link[:href].split("/")
             uplevels_count = (path_arr.map { |i| i if i == ".." }).compact.size
             
