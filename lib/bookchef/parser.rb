@@ -12,7 +12,7 @@ class BookChef
       class LinkLevelOutOfReach < Exception; end
 
       def initialize(path, fn)
-        @path     = path
+        @path     = File.expand_path(path)
         @filename = fn
         @document = Nokogiri::XML.parse File.new("#@path/#@filename", "r")
       end
@@ -32,6 +32,7 @@ class BookChef
         def process_level(level_document, current_path="")
           sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
           convert_links!(level_document, current_path)
+          make_image_paths_absolute!(level_document, current_path)
           
           sourced_sections.each do |s|
             current_fn        = filename_or_index(s[:src])
@@ -61,6 +62,7 @@ class BookChef
         # according to the sections 'name' attrs.
         def convert_links!(document, current_path)
           document.search("a").each do |link|
+            next if inside_code_tags?(link)
             next if link[:href].nil? || link[:href] =~ /\Ahttp:\/\//
             path_arr = link[:href].split("/")
             uplevels_count = (path_arr.map { |i| i if i == ".." }).compact.size
@@ -85,6 +87,13 @@ class BookChef
           end
         end
 
+        def make_image_paths_absolute!(document, current_path)
+          document.search("img").each do |img|
+            next if inside_code_tags?(img)
+            img[:src] = "file://" + @path + current_path + "/#{img[:src]}"
+          end
+        end
+
         # Sets section name like this: <section name="/section1/subsection_a/intro.xml">
         def assign_name_to_section!(node, full_current_path)
           node[:name] = full_current_path
@@ -93,6 +102,10 @@ class BookChef
 
         def filename_or_index(path)
           (path.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
+        end
+
+        def inside_code_tags?(node)
+          node.path =~ /\/code/
         end
       
     end
