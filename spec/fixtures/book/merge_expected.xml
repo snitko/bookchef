@@ -1,5 +1,5 @@
 <book>
-  <section name="/section1/index.xml">
+  <chapter name="/section1/index.xml">
 
     <title>Some section</title>
     <p>hello world</p>
@@ -10,7 +10,7 @@
       <a href="/hello/world.xml">Link to the root</a>
     </section>
 
-  </section>
+  </chapter>
 
   <section>Section 2 Title</section>
   <p>Some other tag</p>

@@ -30,7 +30,7 @@ class BookChef
       private
 
         def process_level(level_document, current_path="")
-          sourced_sections = level_document.xpath('//section[@src]')
+          sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
           convert_links!(level_document, current_path)
           unless sourced_sections.empty?
             sourced_sections.each do |s|
@@ -54,7 +54,7 @@ class BookChef
           return level_document
         end
 
-        # Conver links 'href' attr from relative to absolute path
+        # Converts links 'href' attr from relative to absolute path
         # according to the sections 'name' attrs.
         def convert_links!(document, current_path)
           document.search("a").each do |link|
