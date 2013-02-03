@@ -6,7 +6,7 @@ class BookChef
 
       require "pdfkit"
 
-      def initialize(html_input, css="lib/bookchef/stylesheets/css/default.css", output_file="output.pdf")
+      def initialize(html_input, output_file="output.pdf", css="lib/bookchef/stylesheets/css/default.css")
         @pdfkit = PDFKit.new(html_input, :page_size => 'Letter')
         @pdfkit.stylesheets << "#{Dir.getwd}/#{css}" if css
         @output_file        = output_file

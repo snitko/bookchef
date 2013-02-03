@@ -1,6 +1,6 @@
 require "rubygems"
 require "bundler/setup"
-require File.dirname(__FILE__) + "/../lib/init.rb"
+require File.dirname(__FILE__) + "/../lib/bookchef.rb"
 
 RSpec.configure do |config|
   # Use color in STDOUT

@@ -20,6 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Parser and compiler for BookChef.xml format}
   gem.email = "roman.snitko@gmail.com"
   gem.authors = ["Roman Snitko"]
+  gem.executables << 'bookchef'
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
