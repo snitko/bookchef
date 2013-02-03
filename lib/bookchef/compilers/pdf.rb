@@ -1,5 +1,5 @@
 class BookChef
-  class Compilers
+  class Compiler
     
     # Converts HTML into PDF using PDFKit
     class PDF

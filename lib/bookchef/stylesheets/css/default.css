@@ -51,6 +51,12 @@ p {
 .section .section .section .section .section .section h1 {
   font-size: 125%; }
 
+p.frameDescription {
+  font-style: italic;
+  font-size: 80%;
+  margin-top: 0.5em;
+  text-indent: 0px; }
+
 .table {
   margin: 1.5em 1em; }
   .table table {
@@ -60,11 +66,6 @@ p {
       padding: 0.5em;
       font-size: 90%;
       margin-top: 1.5em; }
-  .table p.tableDescription {
-    font-style: italic;
-    font-size: 80%;
-    margin-top: 0.5em;
-    text-indent: 0px; }
 
 ul li, ol li {
   margin: 0.5em 0; }

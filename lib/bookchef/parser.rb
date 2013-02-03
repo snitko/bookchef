@@ -2,12 +2,13 @@ class BookChef
 
   class Parser
 
-    require "nokogiri"
-
     # Finds all <section src="..."> tags in BookChef xml files
     # and replaces them with the actual content from that source.
     # Outputs one single file merged out of all source files.
     class TreeMerger
+
+      require "nokogiri"
+      attr_reader :document
 
       class LinkLevelOutOfReach < Exception; end
 
@@ -42,7 +43,7 @@ class BookChef
             full_current_path = "#{path}/#{current_fn}"
             
             puts "processing #{full_current_path}" 
-            assign_name_to_section! s, full_current_path
+            assign_id_to_section! s, full_current_path
             
             # Parse the sourced file
             sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
@@ -74,7 +75,7 @@ class BookChef
             path_arr.delete_at(-1) if path_arr[-1] =~ /\.xml\Z/
             new_path    =  path_arr[uplevels_count..path_arr.size-1].join("/")
             new_path    += "/" unless new_path.empty?
-            link[:href] =  "/" + new_path + filename_or_index(link[:href])
+            link[:href] =  "#/" + new_path + filename_or_index(link[:href])
           end
         end
 
@@ -83,6 +84,7 @@ class BookChef
             node[:id] = current_path + "/#{node.name}_#{node[:id]}"
           end
           document.search("//@footnote|//@reference").each do |node|
+            node.parent["number"]  = node.value
             node.parent[node.name] = current_path + "/#{node.name}_#{node.value}"
           end
         end
@@ -94,9 +96,9 @@ class BookChef
           end
         end
 
-        # Sets section name like this: <section name="/section1/subsection_a/intro.xml">
-        def assign_name_to_section!(node, full_current_path)
-          node[:name] = full_current_path
+        # Sets section id like this: <section id="/section1/subsection_a/intro.xml">
+        def assign_id_to_section!(node, full_current_path)
+          node[:id] = full_current_path
           node.remove_attribute("src")
         end
 
@@ -110,7 +112,29 @@ class BookChef
       
     end
 
-    class XSLTConverter
+    
+    class XML2HTML
+      
+      require 'xml/xslt'
+      attr_reader :document, :result
+
+      def initialize(fn, xslt_stylesheet="#{File.dirname(__FILE__)}/stylesheets/xslt/bookchef_to_html.xsl")
+        xslt_stylesheet = File.read(xslt_stylesheet).sub('#{gem_path}', "file://#{File.dirname(__FILE__)}/images")
+        @document     = XML::XSLT.new
+        @document.xml = fn
+        @document.xsl = xslt_stylesheet
+      end
+
+      def run
+        @result = @document.serve
+      end
+
+      def save_to(fn)
+        f = File.open(fn, "w")
+        f.write @result
+        f.close
+      end
+
     end
 
   end

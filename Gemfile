@@ -16,3 +16,4 @@ end
 
 gem "pdfkit"
 gem "nokogiri"
+gem "ruby-xslt"

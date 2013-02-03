@@ -5,14 +5,14 @@
   <p><a href="../hello/world.xml">Link to the root</a></p>
   <span footnote="1">Footnote 1</span>
   <span reference="1">Reference 1</span>
-  <code><a href="hi"><img src="hello.png"/></a></code>
+  <code description="a description of this code"><a href="hi"><img src="hello.png"/></a></code>
 
   <footnotes>
     <footnote id="1">Footnote 1 text</footnote>
   </footnotes>
 
   <references>
-    <reference id="1">Reference 1 text</reference>
+    <reference id="1" type="manual" url="http://google.com">Reference 1 text</reference>
   </references>
 
 </section>
