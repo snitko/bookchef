@@ -4,7 +4,7 @@ require "bookchef"
 case ARGV[0]
 
 when "merge_tree"
-  parser = BookChef::Parser::TreeMerger.new(ARGV[1], "index.xml")
+  parser = BookChef::TreeMerger.new(ARGV[1], "index.xml")
   parser.run
   parser.save_to ARGV[2]
 
@@ -14,8 +14,8 @@ when "make_html"
   parser.save_to ARGV[2]
 
 when "make_pdf"
-  html = File.read(ARGV[1], ARGV[2] || nil)
-  compiler = BookChef::Compiler::PDF.new(html)
+  html = File.read(ARGV[1])
+  compiler = BookChef::Compiler::PDF.new(html, ARGV[2] || nil)
   compiler.compile
 
 else

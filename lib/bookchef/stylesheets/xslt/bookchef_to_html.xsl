@@ -1,4 +1,4 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:code="code_prefix">
   <xsl:output indent="yes" omit-xml-declaration="yes"/>
 
 
@@ -97,6 +97,10 @@
     <xsl:element name="{name()}">
       <xsl:copy-of select="./*"/>
     </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="code-inline">
+    <span class="code inline"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
   
 
