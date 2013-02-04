@@ -12,19 +12,19 @@ code { display: block; clear: both; margin: 1em 0; padding: 0.5em; white-space: 
 
 p { margin: 0 0 0 0; text-indent: 1em }
 span.name, span.filename { font-family: "Monaco"; font-size: 30px; }
-img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-before: always; }
+img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-inside: avoid; }
 
 .footnotes  {
-  @include end_of_section_block_container;
+  @include end_of_section_block_container; page-break-inside: avoid;
   .footnote { @include end_of_section_block; }
 }
 .references {
-  font-style: italic; @include end_of_section_block_container;
+  font-style: italic; @include end_of_section_block_container; page-break-inside: avoid;
   img {margin: 0 0.5em 0 0; margin-bottom: -0.3m; width: 48px; display: inline; }
   .reference { @include end_of_section_block; }
 }
 
-h1 { page-break-before: always; }
+h1 { page-break-inside: avoid; }
 .chapter {
   page-break-before: always;
   h1 { font-size: 270%; line-height: 100%; }
@@ -48,7 +48,7 @@ h1 { page-break-before: always; }
 p.frameDescription { font-style: italic; font-size: 80%; margin-top: 0.5em; text-indent: 0px; }
 
 .table {
-  margin: 1.5em 1em; page-break-before: always;
+  margin: 1.5em 1em; page-break-inside: avoid;
   table {
     border-collapse: collapse;
     td, th { border: solid 1px #aaa; padding: 0.5em; font-size: 90%; margin-top: 1.5em; }

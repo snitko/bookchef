@@ -75,16 +75,16 @@
     <xsl:param name="href" select="./@reference"/>
     <span class="referenceSelection">
       <xsl:value-of select="."/>
-      <xsl:text> </xsl:text><a href="{$href}">[<xsl:value-of select="./@number"/>]</a>
+      <xsl:text> </xsl:text><a href="#{$href}">[<xsl:value-of select="./@number"/>]</a>
     </span>
   </xsl:template>
 
 
   <xsl:template match="*[@footnote]">
-    <xsl:param name="href" select="./@reference"/>
+    <xsl:param name="href" select="./@footnote"/>
     <span class="footnoteSelection">
       <xsl:value-of select="."/>
-      <a href="{$href}"><sup><xsl:value-of select="./@number"/></sup></a>
+      <a href="#{$href}"><sup><xsl:value-of select="./@number"/></sup></a>
     </span>
   </xsl:template>
 

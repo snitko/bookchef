@@ -30,13 +30,14 @@ img {
   display: block;
   margin: 2em 1em;
   width: 80%;
-  page-break-before: always; }
+  page-break-inside: avoid; }
 
 .footnotes {
   font-size: 80%;
   margin: 1em;
   border: dotted 1px #aaaaaa;
-  padding: 1em 1em 0 1em; }
+  padding: 1em 1em 0 1em;
+  page-break-inside: avoid; }
   .footnotes .footnote {
     margin-bottom: 1em; }
 
@@ -45,7 +46,8 @@ img {
   font-size: 80%;
   margin: 1em;
   border: dotted 1px #aaaaaa;
-  padding: 1em 1em 0 1em; }
+  padding: 1em 1em 0 1em;
+  page-break-inside: avoid; }
   .references img {
     margin: 0 0.5em 0 0;
     margin-bottom: -0.3m;
@@ -55,7 +57,7 @@ img {
     margin-bottom: 1em; }
 
 h1 {
-  page-break-before: always; }
+  page-break-inside: avoid; }
 
 .chapter {
   page-break-before: always; }
@@ -81,7 +83,7 @@ p.frameDescription {
 
 .table {
   margin: 1.5em 1em;
-  page-break-before: always; }
+  page-break-inside: avoid; }
   .table table {
     border-collapse: collapse; }
     .table table td, .table table th {
