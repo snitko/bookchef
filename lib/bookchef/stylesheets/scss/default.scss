@@ -20,8 +20,8 @@ code { display: block; clear: both; margin: 1em 0; padding: 0.5em 0; white-space
   .reference { @include end_of_section_block; }
 }
 
-
 p { margin: 0 0 0 0; text-indent: 1em }
+span.name, span.filename { font-family: "Monaco"; font-size: 14px; }
 
 .section {
   h1 { font-size: 270%; }

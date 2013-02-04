@@ -102,6 +102,14 @@
   <xsl:template match="code-inline">
     <span class="code inline"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
+
+  <xsl:template match="name">
+    <span class="name"><xsl:apply-templates select="@* |node()" /></span>
+  </xsl:template>
+
+  <xsl:template match="filename">
+    <span class="filename"><xsl:apply-templates select="@* |node()" /></span>
+  </xsl:template>
   
 
 </xsl:stylesheet>
