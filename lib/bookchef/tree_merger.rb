@@ -27,9 +27,10 @@ class BookChef
 
       def process_level(level_document, current_path="")
         sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
-        convert_tags_in_code!(level_document)
-        convert_links!(level_document, current_path)
-        make_image_paths_absolute!(level_document, current_path)
+
+        normalize_code!            level_document
+        convert_links!             level_document, current_path
+        make_image_paths_absolute! level_document, current_path
         
         sourced_sections.each do |s|
           current_fn        = filename_or_index(s[:src])
@@ -100,9 +101,37 @@ class BookChef
         (path.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
       end
 
-      def convert_tags_in_code!(document)
-        # This works because Nokogiri automatically converts <> into &lt;&gt;
-        document.search("code").each { |c| c.content = c.children.to_s }
+      def normalize_code!(document)
+        document.search("code").each do |c|
+          minimum_whitespace = nil
+          lines_arr = c.children.to_s.split("\n")
+          new_lines_arr = []
+          lines_arr.each_with_index do |l,i|
+            next if l =~ /\A\s*\Z/
+            match_size = l.match(/\A( )*/).to_s.size
+            minimum_whitespace = match_size if !minimum_whitespace || match_size < minimum_whitespace
+          end
+          lines_arr.each_with_index do |l,i|
+            next if l =~ /\A\s*\Z/ && (i == 0 || i == lines_arr.size-1)
+            l.sub!("\n", '')
+            l.sub!(/\A( ){#{minimum_whitespace}}/, '')
+            new_lines_arr << split_long_line(l, l.match(/\A( )*/).to_s.size)
+          end
+          c.content = new_lines_arr.compact.join("\n")
+        end
+      end
+
+      def split_long_line(line, leading_spaces_number=0)
+        if line.length > 70
+          lines = line[61..line.length-1].split(/[ .]/, 2)
+          line1 = line[0..60] + lines[0]
+          leading_spaces = (0..leading_spaces_number-1).map { ' ' }.join
+          line2 = leading_spaces.to_s + lines[1].to_s
+          line2 = split_long_line(line2, leading_spaces_number)
+          return "#{line1}\n#{line2}"
+        else
+          line
+        end
       end
 
   end

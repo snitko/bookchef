@@ -6,7 +6,13 @@
   <span footnote="1">Footnote 1</span>
   <span reference="1">Reference 1</span>
   <code description="a description of this code"><%= link_to %><a href="hi"><img src="hello.png"/></a></code>
-  <code>puts "some ruby code"</code>
+  <code>
+    puts "some ruby code"
+      puts "some more ruby code"
+        puts "even more ruby code"
+          puts "A ruby is a pink to blood-red colored gemstone, a variety of the mineral corundum (aluminium oxide). The red color is caused mainly by the presence of the element chromium. Its name comes from ruber, Latin for red."
+  </code>
+
   <code-inline>hello world</code:inline>
   <name>Name</name>
   <filename>File Name</filename>

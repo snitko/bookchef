@@ -42,6 +42,12 @@
     </div>
   </xsl:template>
 
+  <xsl:template match="chapter/h1">
+    <h1>
+      Глава <xsl:number select=".."/>: <xsl:value-of select="." />
+    </h1>
+  </xsl:template>
+
   <xsl:template match="section">
     <div class="section">
       <xsl:apply-templates select="@* |node()" />
