@@ -2,7 +2,6 @@ class BookChef
 
   class TreeMerger
 
-    require "nokogiri"
     attr_reader :document
 
     class LinkLevelOutOfReach < Exception; end
@@ -10,7 +9,8 @@ class BookChef
     def initialize(path, fn)
       @path     = File.expand_path(path)
       @filename = fn
-      @document = Nokogiri::XML.parse File.new("#@path/#@filename", "r")
+      @document = File.read("#@path/#@filename").gsub(/<%(.*?)%>/, '&lt;%\1%&gt;')
+      @document = Nokogiri::XML.parse @document
     end
 
     def run
@@ -27,6 +27,7 @@ class BookChef
 
       def process_level(level_document, current_path="")
         sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
+        convert_tags_in_code!(level_document)
         convert_links!(level_document, current_path)
         make_image_paths_absolute!(level_document, current_path)
         
@@ -41,7 +42,7 @@ class BookChef
           assign_id_to_section! s, full_current_path
           
           # Parse the sourced file
-          sourced_document = Nokogiri::XML.parse(File.new("#@path#{full_current_path}"))
+          sourced_document = Nokogiri::XML.parse(File.read("#@path#{full_current_path}").gsub(/<%(.*?)%>/, '&lt;%\1%&gt;'))
           convert_references_and_footnotes! sourced_document, full_current_path
 
           # Now process it too, replacing all src-s with xml from sourced files
@@ -58,7 +59,6 @@ class BookChef
       # according to the sections 'name' attrs.
       def convert_links!(document, current_path)
         document.search("a").each do |link|
-          next if inside_code_tags?(link)
           next if link[:href].nil? || link[:href] =~ /\Ahttp:\/\//
           path_arr = link[:href].split("/")
           uplevels_count = (path_arr.map { |i| i if i == ".." }).compact.size
@@ -86,7 +86,6 @@ class BookChef
 
       def make_image_paths_absolute!(document, current_path)
         document.search("img").each do |img|
-          next if inside_code_tags?(img)
           img[:src] = "file://" + @path + current_path + "/#{img[:src]}"
         end
       end
@@ -101,10 +100,11 @@ class BookChef
         (path.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
       end
 
-      def inside_code_tags?(node)
-        node.path =~ /\/code/
+      def convert_tags_in_code!(document)
+        # This works because Nokogiri automatically converts <> into &lt;&gt;
+        document.search("code").each { |c| c.content = c.children.to_s }
       end
-    
+
   end
 
 end

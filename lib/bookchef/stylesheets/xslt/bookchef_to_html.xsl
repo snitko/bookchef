@@ -1,6 +1,7 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:code="code_prefix">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output indent="yes" omit-xml-declaration="yes"/>
 
+  <xsl:param name="gem_path">#{gem_path}</xsl:param>
 
   <!-- Identity template -->
   <xsl:template match="@* | node()">
@@ -12,6 +13,10 @@
 
   <xsl:template match="/">
     <html>
+      <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <link href="{$gem_path}/stylesheets/css/default.css" rel="stylesheet" type="text/css"/>
+      </head>
       <xsl:apply-templates select="@* | node()" />
     </html>
   </xsl:template>
@@ -68,7 +73,7 @@
     <xsl:param name="href" select="./@reference"/>
     <span class="referenceSelection">
       <xsl:value-of select="."/>
-      <xsl:text>#x20;</xsl:text><a href="{$href}">[<xsl:value-of select="./@number"/>]</a>
+      <xsl:text> </xsl:text><a href="{$href}">[<xsl:value-of select="./@number"/>]</a>
     </span>
   </xsl:template>
 
@@ -85,17 +90,16 @@
     <xsl:param name="id"   select="./@id"/>
     <xsl:param name="type" select="./@type"/>
     <xsl:param name="url"  select="./@url"/>
-    <xsl:param name="gem_path">#{gem_path}</xsl:param>
     <div class="reference" id="{$id}">
-      <img src="{$gem_path}/{$type}_link.png" />
+      <img src="{$gem_path}/images/{$type}_link.png" />
       <a href="{$url}"><xsl:value-of select="."/></a>
     </div>
   </xsl:template>
 
   <xsl:template match="code|table">
-    <p class="frameDescription"><xsl:value-of select="./@description"/></p>
+    <p class="frameDescription"><xsl:value-of select="./@description"/><xsl:text> </xsl:text></p>
     <xsl:element name="{name()}">
-      <xsl:copy-of select="./*"/>
+      <xsl:copy-of select="./node()"/>
     </xsl:element>
   </xsl:template>
 
@@ -110,6 +114,5 @@
   <xsl:template match="filename">
     <span class="filename"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
-  
 
 </xsl:stylesheet>

@@ -5,7 +5,8 @@
   <p><a href="../hello/world.xml">Link to the root</a></p>
   <span footnote="1">Footnote 1</span>
   <span reference="1">Reference 1</span>
-  <code description="a description of this code"><a href="hi"><img src="hello.png"/></a></code>
+  <code description="a description of this code"><%= link_to %><a href="hi"><img src="hello.png"/></a></code>
+  <code>puts "some ruby code"</code>
   <code-inline>hello world</code:inline>
   <name>Name</name>
   <filename>File Name</filename>
