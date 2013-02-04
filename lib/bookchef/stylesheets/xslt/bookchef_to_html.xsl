@@ -30,9 +30,10 @@
 
 
   <xsl:template match="title">
-    <h1>
-      <xsl:apply-templates select="@* |node()" />
-    </h1>
+    <h1><xsl:value-of select="." /></h1>
+  </xsl:template>
+  <xsl:template match="chapter/title">
+    <h1>Глава <xsl:number count="chapter"/>: <xsl:value-of select="." /></h1>
   </xsl:template>
 
 
@@ -42,11 +43,6 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="chapter/h1">
-    <h1>
-      Глава <xsl:number select=".."/>: <xsl:value-of select="." />
-    </h1>
-  </xsl:template>
 
   <xsl:template match="section">
     <div class="section">

@@ -39,7 +39,7 @@
 
   </chapter>
 
-  <section>Section 2 Title</section>
+  <chapter><title>Chapter 2 Title</title></chapter>
   <p>Some other tag</p>
 
 </book>

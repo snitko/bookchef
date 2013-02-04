@@ -1,5 +1,7 @@
 <book>
   <chapter src="section1">Section Title</chapter>
-  <section>Section 2 Title</section>
+  <chapter>
+    <title>Chapter 2 Title</title>
+  </chapter>
   <p>Some other tag</p>
 </book>

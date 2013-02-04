@@ -29,7 +29,8 @@ img {
   clear: both;
   display: block;
   margin: 2em 1em;
-  width: 80%; }
+  width: 80%;
+  page-break-before: always; }
 
 .footnotes {
   font-size: 80%;
@@ -53,18 +54,24 @@ img {
   .references .reference {
     margin-bottom: 1em; }
 
-.chapter h1 {
-  font-size: 270%; }
-.chapter .section h1 {
-  font-size: 220%; }
-.chapter .section .section h1 {
-  font-size: 190%; }
-.chapter .section .section .section h1 {
-  font-size: 170%; }
-.chapter .section .section .section .section h1 {
-  font-size: 140%; }
-.chapter .section .section .section .section .section h1 {
-  font-size: 125%; }
+h1 {
+  page-break-before: always; }
+
+.chapter {
+  page-break-before: always; }
+  .chapter h1 {
+    font-size: 270%;
+    line-height: 100%; }
+  .chapter .section h1 {
+    font-size: 220%; }
+  .chapter .section .section h1 {
+    font-size: 190%; }
+  .chapter .section .section .section h1 {
+    font-size: 170%; }
+  .chapter .section .section .section .section h1 {
+    font-size: 140%; }
+  .chapter .section .section .section .section .section h1 {
+    font-size: 125%; }
 
 p.frameDescription {
   font-style: italic;
@@ -73,7 +80,8 @@ p.frameDescription {
   text-indent: 0px; }
 
 .table {
-  margin: 1.5em 1em; }
+  margin: 1.5em 1em;
+  page-break-before: always; }
   .table table {
     border-collapse: collapse; }
     .table table td, .table table th {
