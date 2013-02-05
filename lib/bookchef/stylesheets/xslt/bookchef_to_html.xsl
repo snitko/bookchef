@@ -125,7 +125,8 @@
 
   <xsl:template match="a[not(node())]">
     <xsl:param name="href" select="./@href"/>
-    <!--<a href="#{$href}"><xsl:value-of select="@id={$href}"/></a>-->
+    <xsl:variable name="name"><xsl:value-of select='translate($href, "#", "")'/></xsl:variable>
+    <a href="{$href}"><xsl:value-of select="//*[@id=$name]/title"/></a>
   </xsl:template>
 
 </xsl:stylesheet>
