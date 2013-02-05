@@ -60,18 +60,19 @@ class BookChef
       # according to the sections 'name' attrs.
       def convert_links!(document, current_path)
         document.search("a").each do |link|
+
           next if link[:href].nil? || link[:href] =~ /\Ahttp:\/\//
-          path_arr = link[:href].split("/")
-          uplevels_count = (path_arr.map { |i| i if i == ".." }).compact.size
-          
-          if uplevels_count >= current_path.split("/").size
+          link_path_arr    = link[:href].split("/")
+          current_path_arr = current_path.split("/").reject { |i| i.empty? }
+          uplevels_count   = (link_path_arr.map { |i| i if i == ".." }).compact.size
+          link_path_arr.delete_if { |i| i == ".." }
+
+          if uplevels_count > current_path_arr.size
             raise LinkLevelOutOfReach, "for link #{link.to_s} in \"#{current_path}\""
           end
 
-          path_arr.delete_at(-1) if path_arr[-1] =~ /\.xml\Z/
-          new_path    =  path_arr[uplevels_count..path_arr.size-1].join("/")
-          new_path    += "/" unless new_path.empty?
-          link[:href] =  "#/" + new_path + filename_or_index(link[:href])
+          current_path_arr = current_path_arr.reverse.drop(uplevels_count).reverse
+          link[:href] = "#/#{current_path_arr.join("/")}/#{path_with_filename(link_path_arr.join("/"))}".gsub(/\/+/, '/')
         end
       end
 
@@ -97,8 +98,22 @@ class BookChef
         node.remove_attribute("src")
       end
 
+      # returns just the filename out of the full path
+      # For example, if the path is "/section1/subsection"
+      # it returns "index.xml"
       def filename_or_index(path)
         (path.match(/[^\/]*\.xml\Z/) || ["index.xml"])[0]
+      end
+
+      # returns full path attaching "index.xml" to the end of no file specified
+      # For example, if the path is "/section/subsection"
+      # it returns "/section/subsection/index.xml"
+      def path_with_filename(path)
+        if path.match(/[^\/]*\.xml\Z/)
+          path
+        else
+          path + "/index.xml"
+        end
       end
 
       def normalize_code!(document)

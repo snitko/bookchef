@@ -123,4 +123,9 @@
     <span class="filename"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
 
+  <xsl:template match="a[not(node())]">
+    <xsl:param name="href" select="./@href"/>
+    <!--<a href="#{$href}"><xsl:value-of select="@id={$href}"/></a>-->
+  </xsl:template>
+
 </xsl:stylesheet>

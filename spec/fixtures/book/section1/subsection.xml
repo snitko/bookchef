@@ -2,6 +2,8 @@
   <title>Subsection title</title>
   <a href="../main.xml">Link to the root</a>
   <a href="../hello/">Link to the root</a>
+  <a href="supersubsection/hello.xml"/>
+  <a href="index.xml"/>
   <p><a href="../hello/world.xml">Link to the root</a></p>
   <span footnote="1">Footnote 1</span>
   <span reference="1">Reference 1</span>
