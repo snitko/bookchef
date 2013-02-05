@@ -2,5 +2,14 @@
   <title>Some section</title>
   <p>hello world</p>
   <section src="subsection.xml">Subsection title</section>
-  <section src="supersubsection/hello.xml">SuperSubSection Hello</section>
+  <section src="supersubsection"/>
+
+  <footnotes>
+    <footnote id="1">Footnote 1 text</footnote>
+  </footnotes>
+
+  <references>
+    <reference id="1" type="manual" url="http://google.com">Reference 1 text</reference>
+  </references>
+
 </section>

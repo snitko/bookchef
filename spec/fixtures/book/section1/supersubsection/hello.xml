@@ -1,3 +1,6 @@
 <section>
-  <title>hello</title>
+  <title>SuperSubSection hello</title>
+
+  <span reference="1">a supersubsection reference link</span>
+
 </section>

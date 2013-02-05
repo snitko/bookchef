@@ -14,7 +14,8 @@ class BookChef
     end
 
     def run
-      @document = process_level(@document)
+      @documents = []
+      @document  = process_level(@document)
     end
 
     def save_to(fn)
@@ -26,6 +27,7 @@ class BookChef
     private
 
       def process_level(level_document, current_path="")
+        @documents << level_document
         sourced_sections = level_document.xpath('//section[@src]|//chapter[@src]')
 
         normalize_code!            level_document
@@ -35,7 +37,7 @@ class BookChef
         sourced_sections.each do |s|
           current_fn        = filename_or_index(s[:src])
           current_dir       = s[:src].sub(/\/?[^\/]*\.xml\Z/, '')
-          path = current_path
+          path              = current_path
           path              += "/#{current_dir}" unless current_dir.empty?
           full_current_path = "#{path}/#{current_fn}"
           
@@ -53,7 +55,7 @@ class BookChef
           s.children = sourced_document.root.children
         end unless sourced_sections.empty?
 
-        return level_document
+        @documents.delete(level_document) and return level_document
       end
 
       # Converts links 'href' attr from relative to absolute path
@@ -77,12 +79,29 @@ class BookChef
       end
 
       def convert_references_and_footnotes!(document, current_path)
+        
+        # Search the document tree and find the closest file
+        # that contains <footnotes> and <references>
+        container_paths = { footnote: current_path.split("/"), reference: current_path.split("/") }
+        [:footnote, :reference].each do |container|
+          catch :break_inner_loop do
+            (@documents + [document]).reverse.each_with_index do |d,i|
+              throw :break_inner_loop if d.search("//#{container}s").size > 0
+              container_paths[container].pop if container_paths[container].pop == "index.xml"
+              container_paths["#{container}_file"] = "/index.xml"
+            end
+          end
+        end
+        
         document.search("//footnote|//reference").each do |node|
           node[:id] = current_path + "/#{node.name}_#{node[:id]}"
         end
+        
         document.search("//@footnote|//@reference").each do |node|
           node.parent["number"]  = node.value
-          node.parent[node.name] = current_path + "/#{node.name}_#{node.value}"
+          node.parent[node.name] = container_paths[node.name.to_sym].join("/")  +
+                                   (container_paths["#{node.name}_file"] || '') +
+                                   "/#{node.name}_#{node.value}"
         end
       end
 

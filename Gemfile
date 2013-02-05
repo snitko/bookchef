@@ -12,6 +12,7 @@ group :development do
   gem 'rspec'
   gem 'sass'
   gem 'equivalent-xml'
+  gem 'nokogiri-diff'
 end
 
 gem "pdfkit"

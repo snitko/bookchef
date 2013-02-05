@@ -15,12 +15,12 @@
       <a href="#/main.xml">Link to the root</a>
       <a href="#/hello/index.xml">Link to the root</a>
 
-      <a href="#/section1/supersubsection/hello.xml">hello</a>
+      <a href="#/section1/supersubsection/hello.xml">SuperSubSection hello</a>
       <a href="#/section1/index.xml">Some section</a>
 
       <p><a href="#/hello/world.xml">Link to the root</a></p>
-      <span class="footnoteSelection">Footnote 1<a href="#/section1/subsection.xml/footnote_1"><sup>1</sup></a></span>
-      <span class="referenceSelection">Reference 1 <a href="#/section1/subsection.xml/reference_1">[1]</a></span>
+      <span class="footnoteSelection">Footnote 1<a href="#/section1/index.xml/footnote_1"><sup>1</sup></a></span>
+      <span class="referenceSelection">Reference 1 <a href="#/section1/index.xml/reference_1">[1]</a></span>
 
       <p class="frameDescription">a description of this code </p>
       <code>&lt;%= link_to %&gt;&lt;a href="hi"&gt;
@@ -40,17 +40,28 @@
       <span class="filename">File Name</span>
 
 
-      <div class="footnotes">
-        <div class="footnote" id="/section1/subsection.xml/footnote_1"><sup>1</sup> Footnote 1 text</div>
-      </div>
-
-      <div class="references">
-        <div class="reference" id="/section1/subsection.xml/reference_1"><img src="file:///home/roman/Dropbox/Work/my_libs/bookchef/lib/bookchef/images/manual_link.png">[1] <a href="http://google.com">Reference 1 text</a></div>
-      </div>
-
     </div>
-    <div class="section" id="/section1/supersubsection/hello.xml">
-      <h1>hello</h1>
+
+    <div class="section" id="/section1/supersubsection/index.xml">
+      <h1>SuperSubSection index</h1>
+      <div class="section" id="/section1/supersubsection/hello.xml">
+        <h1>SuperSubSection hello</h1>
+        <span class="referenceSelection">a supersubsection reference link <a href="#/section1/supersubsection/index.xml/reference_1">[1]</a></span>
+      </div>
+      <div class="references">
+        <div class="reference" id="/section1/supersubsection/index.xml/reference_1">
+<img src="file:///home/roman/Dropbox/Work/my_libs/bookchef/lib/bookchef/images/manual_link.png">
+      [1] <a href="http://google.com">a supersubsection reference</a>
+</div>
+      </div>
+    </div>
+
+    <div class="footnotes">
+      <div class="footnote" id="/section1/index.xml/footnote_1"><sup>1</sup> Footnote 1 text</div>
+    </div>
+
+    <div class="references">
+      <div class="reference" id="/section1/index.xml/reference_1"><img src="file:///home/roman/Dropbox/Work/my_libs/bookchef/lib/bookchef/images/manual_link.png">[1] <a href="http://google.com">Reference 1 text</a></div>
     </div>
 
   </div>

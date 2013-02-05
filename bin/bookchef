@@ -15,7 +15,7 @@ when "make_html"
 
 when "make_pdf"
   html = File.read(ARGV[1])
-  compiler = BookChef::Compiler::PDF.new(html, ARGV[2] || nil)
+  compiler = BookChef::Compiler::PDF.new(html, (ARGV[2] || nil))
   compiler.compile
 
 else

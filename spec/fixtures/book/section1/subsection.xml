@@ -19,12 +19,4 @@
   <name>Name</name>
   <filename>File Name</filename>
 
-  <footnotes>
-    <footnote id="1">Footnote 1 text</footnote>
-  </footnotes>
-
-  <references>
-    <reference id="1" type="manual" url="http://google.com">Reference 1 text</reference>
-  </references>
-
 </section>

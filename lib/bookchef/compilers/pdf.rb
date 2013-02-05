@@ -4,8 +4,6 @@ class BookChef
     # Converts HTML into PDF using PDFKit
     class PDF
 
-      require "pdfkit"
-
       def initialize(html_input, output_file="/tmp/output.pdf", css="lib/bookchef/stylesheets/css/default.css")
         @pdfkit = PDFKit.new(html_input, :page_size => 'Letter')
         @pdfkit.stylesheets << "#{Dir.getwd}/#{css}" if css

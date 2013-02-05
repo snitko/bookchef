@@ -12,6 +12,9 @@ GEM
       rdoc
     json (1.7.6)
     nokogiri (1.5.5)
+    nokogiri-diff (0.1.2)
+      nokogiri (~> 1.5)
+      tdiff (~> 0.3, >= 0.3.2)
     pdfkit (0.5.2)
     rake (10.0.3)
     rdoc (3.12)
@@ -26,6 +29,7 @@ GEM
     rspec-mocks (2.12.2)
     ruby-xslt (0.9.9)
     sass (3.2.5)
+    tdiff (0.3.3)
 
 PLATFORMS
   ruby
@@ -35,6 +39,7 @@ DEPENDENCIES
   equivalent-xml
   jeweler
   nokogiri
+  nokogiri-diff
   pdfkit
   rdoc
   rspec

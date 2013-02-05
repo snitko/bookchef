@@ -12,8 +12,8 @@
       <a href="#/section1/index.xml"/>
 
       <p><a href="#/hello/world.xml">Link to the root</a></p>
-      <span footnote="/section1/subsection.xml/footnote_1" number="1">Footnote 1</span>
-      <span reference="/section1/subsection.xml/reference_1" number="1">Reference 1</span>
+      <span footnote="/section1/index.xml/footnote_1" number="1">Footnote 1</span>
+      <span reference="/section1/index.xml/reference_1" number="1">Reference 1</span>
       <code description="a description of this code">&amp;lt;%= link_to %&amp;gt;&lt;a href="hi"&gt;
   &lt;img src="hello.png"/&gt;
 &lt;/a&gt;</code>
@@ -31,18 +31,26 @@
       <name>Name</name>
       <filename>File Name</filename>
 
-      <footnotes>
-        <footnote id="/section1/subsection.xml/footnote_1">Footnote 1 text</footnote>
-      </footnotes>
+    </section>
 
+    <section id="/section1/supersubsection/index.xml">
+      <title>SuperSubSection index</title>
+      <section id="/section1/supersubsection/hello.xml">
+        <title>SuperSubSection hello</title>
+        <span reference="/section1/supersubsection/index.xml/reference_1" number="1">a supersubsection reference link</span>
+      </section>
       <references>
-        <reference id="/section1/subsection.xml/reference_1" type="manual" url="http://google.com">Reference 1 text</reference>
+        <reference id="/section1/supersubsection/index.xml/reference_1" type="manual" url="http://google.com">a supersubsection reference</reference>
       </references>
+    </section>
 
-    </section>
-    <section id="/section1/supersubsection/hello.xml">
-      <title>hello</title>
-    </section>
+    <footnotes>
+      <footnote id="/section1/index.xml/footnote_1">Footnote 1 text</footnote>
+    </footnotes>
+
+    <references>
+      <reference id="/section1/index.xml/reference_1" type="manual" url="http://google.com">Reference 1 text</reference>
+    </references>
 
   </chapter>
 
