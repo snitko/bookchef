@@ -29,13 +29,16 @@
   </xsl:template>
 
 
-  <xsl:template match="title">
+  <xsl:template match="section/title">
     <h1><xsl:value-of select="." /></h1>
   </xsl:template>
   <xsl:template match="chapter/title">
     <h1>Глава <xsl:number count="chapter"/>: <xsl:value-of select="." /></h1>
   </xsl:template>
 
+  <xsl:template match="li/title">
+    <b><xsl:value-of select="." /></b>
+  </xsl:template>
 
   <xsl:template match="chapter">
     <div class="chapter">
@@ -59,8 +62,10 @@
   </xsl:template>
 
   <xsl:template match="footnote">
-    <div class="footnote">
-      <xsl:apply-templates select="@* |node()" />
+    <xsl:param name="id" select="./@id"/>
+    <div class="footnote" id="{$id}">
+      <sup><xsl:number count="footnote" level="single"/></sup><xsl:text> </xsl:text>
+      <xsl:apply-templates select="node()"/>
     </div>
   </xsl:template>
 
@@ -94,6 +99,7 @@
     <xsl:param name="url"  select="./@url"/>
     <div class="reference" id="{$id}">
       <img src="{$gem_path}/images/{$type}_link.png" />
+      [<xsl:number count="reference" level="single"/>]<xsl:text> </xsl:text>
       <a href="{$url}"><xsl:value-of select="."/></a>
     </div>
   </xsl:template>

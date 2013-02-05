@@ -56,6 +56,9 @@ img {
   .references .reference {
     margin-bottom: 1em; }
 
+.footnotes, .references {
+  line-height: 100%; }
+
 h1 {
   page-break-inside: avoid; }
 
@@ -92,5 +95,7 @@ p.frameDescription {
       font-size: 90%;
       margin-top: 1.5em; }
 
-ul li, ol li {
-  margin: 0.5em 0; }
+ul, ol {
+  margin-left: 2em; }
+  ul li, ol li {
+    margin: 0.5em 0; }

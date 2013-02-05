@@ -24,6 +24,8 @@ img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-insid
   .reference { @include end_of_section_block; }
 }
 
+.footnotes, .references { line-height: 100%; }
+
 h1 { page-break-inside: avoid; }
 .chapter {
   page-break-before: always;
@@ -57,5 +59,6 @@ p.frameDescription { font-style: italic; font-size: 80%; margin-top: 0.5em; text
 }
 
 ul, ol {
+  margin-left: 2em;
   li { margin: 0.5em 0; }
 }
