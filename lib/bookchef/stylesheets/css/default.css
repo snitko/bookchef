@@ -67,16 +67,26 @@ h1 {
   .chapter h1 {
     font-size: 270%;
     line-height: 100%; }
-  .chapter .section h1 {
-    font-size: 220%; }
-  .chapter .section .section h1 {
-    font-size: 190%; }
-  .chapter .section .section .section h1 {
-    font-size: 170%; }
-  .chapter .section .section .section .section h1 {
-    font-size: 140%; }
-  .chapter .section .section .section .section .section h1 {
-    font-size: 125%; }
+  .chapter .section {
+    margin-top: 2em; }
+    .chapter .section h1 {
+      font-size: 220%; }
+    .chapter .section .section {
+      margin-top: 1.7em; }
+      .chapter .section .section h1 {
+        font-size: 190%; }
+      .chapter .section .section .section {
+        margin-top: 1.5em; }
+        .chapter .section .section .section h1 {
+          font-size: 170%; }
+        .chapter .section .section .section .section {
+          margin-top: 1.3em; }
+          .chapter .section .section .section .section h1 {
+            font-size: 140%; }
+          .chapter .section .section .section .section .section {
+            margin-top: 1.1em; }
+            .chapter .section .section .section .section .section h1 {
+              font-size: 125%; }
 
 p.frameDescription {
   font-style: italic;
@@ -84,16 +94,17 @@ p.frameDescription {
   margin-top: 0.5em;
   text-indent: 0px; }
 
-.table {
+table {
   margin: 1.5em 1em;
-  page-break-inside: avoid; }
-  .table table {
-    border-collapse: collapse; }
-    .table table td, .table table th {
-      border: solid 1px #aaaaaa;
-      padding: 0.5em;
-      font-size: 90%;
-      margin-top: 1.5em; }
+  page-break-inside: avoid;
+  border-collapse: collapse; }
+  table td {
+    vertical-align: top; }
+  table td, table th {
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+    margin-top: 1.5em;
+    font-size: 200%; }
 
 ul, ol {
   margin-left: 2em; }
