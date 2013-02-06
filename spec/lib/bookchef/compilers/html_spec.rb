@@ -13,10 +13,11 @@ describe BookChef::Compiler::HTML do
     converter.save_to("#@book_dir/html_converted.html")
 
     converted_html = Nokogiri::XML.parse File.new("#@book_dir/html_converted.html")
-    source_xml     = Nokogiri::XML.parse File.new("#@book_dir/html_expected.html")
+    expected_html  = File.read("#@book_dir/html_expected.html").gsub('#{gem_path}', BookChef::LIB_PATH)
+    expected_html  = Nokogiri::XML.parse expected_html
     File.unlink    "#{@book_dir}/html_converted.html"
 
-    converted_html.should be_equivalent_to(source_xml)
+    converted_html.should be_equivalent_to(expected_html)
   end
 
 end

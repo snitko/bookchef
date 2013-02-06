@@ -4,11 +4,10 @@ class BookChef
     # Converts XML into HTML using xslt
     class HTML
 
-      @@lib_path = File.expand_path(File.dirname(__FILE__) + "../../")
       attr_reader :document, :result
 
-      def initialize(fn, xslt_stylesheet="#{@@lib_path}/stylesheets/xslt/bookchef_to_html.xsl")
-        xslt_stylesheet = File.read(xslt_stylesheet).sub('#{gem_path}', "file://#{@@lib_path}")
+      def initialize(fn, xslt_stylesheet="#{BookChef::LIB_PATH}/stylesheets/xslt/bookchef_to_html.xsl")
+        xslt_stylesheet = File.read(xslt_stylesheet).sub('#{gem_path}', "file://#{BookChef::LIB_PATH}")
         @document     = XML::XSLT.new
         @document.xml = fn
         @document.xsl = xslt_stylesheet
