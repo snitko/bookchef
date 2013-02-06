@@ -1,6 +1,6 @@
-body { font-family: "Times New Roman"; font-size: 40px; width: 1500px; line-height: 150%; }
+body { font-family: "Times New Roman"; line-height: 150%; }
 
-code, .code.inline { font-family: "Monaco"; font-size: 30px; background-color: #eee; }
+code, .code.inline { font-family: "Monaco"; font-size: 80%; background-color: #eee; }
 code { display: block; clear: both; margin: 1em 0; padding: 0.5em; white-space: pre; line-height: 120%; }
 
 @mixin end_of_section_block_container {
@@ -10,8 +10,8 @@ code { display: block; clear: both; margin: 1em 0; padding: 0.5em; white-space: 
   margin-bottom: 1em;
 }
 
-p { margin: 0 0 0 0; text-indent: 1em }
-span.name, span.filename { font-family: "Monaco"; font-size: 30px; }
+p { margin: 0 0 0 0; text-indent: 1em; text-align: justify; }
+span.name, span.filename { font-family: "Monaco"; font-size: 80%; }
 img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-inside: avoid; }
 
 .footnotes  {
@@ -20,11 +20,11 @@ img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-insid
 }
 .references {
   font-style: italic; @include end_of_section_block_container; page-break-inside: avoid;
-  img {margin: 0 0.5em 0 0; margin-bottom: -0.3m; width: 48px; display: inline; }
+  img {margin: 0 0.5em 0 0; margin-bottom: -0.3em;display: inline; width: 16px; }
   .reference { @include end_of_section_block; }
 }
 
-.footnotes, .references { line-height: 100%; }
+.footnotes, .references { font-size: 70%; line-height: 120%; }
 
 h1 { page-break-inside: avoid; }
 .chapter {

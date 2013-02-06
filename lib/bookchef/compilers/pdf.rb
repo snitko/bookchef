@@ -5,13 +5,12 @@ class BookChef
     class PDF
 
       def initialize(html_input, output_file="/tmp/output.pdf", css="lib/bookchef/stylesheets/css/default.css")
-        @pdfkit = PDFKit.new(html_input, :page_size => 'Letter')
-        @pdfkit.stylesheets << "#{Dir.getwd}/#{css}" if css
-        @output_file        = output_file
+        @pdf         = PDFKit.new(html_input, enable_external_links: true, enable_internal_links: true)
+        @output_file = output_file
       end
 
       def compile
-        @pdfkit.to_file @output_file
+        @pdf.to_file(@output_file)
       end
 
     end

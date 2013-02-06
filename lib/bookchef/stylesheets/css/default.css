@@ -1,12 +1,10 @@
 body {
   font-family: "Times New Roman";
-  font-size: 40px;
-  width: 1500px;
   line-height: 150%; }
 
 code, .code.inline {
   font-family: "Monaco";
-  font-size: 30px;
+  font-size: 80%;
   background-color: #eee; }
 
 code {
@@ -19,11 +17,12 @@ code {
 
 p {
   margin: 0 0 0 0;
-  text-indent: 1em; }
+  text-indent: 1em;
+  text-align: justify; }
 
 span.name, span.filename {
   font-family: "Monaco";
-  font-size: 30px; }
+  font-size: 80%; }
 
 img {
   clear: both;
@@ -50,14 +49,15 @@ img {
   page-break-inside: avoid; }
   .references img {
     margin: 0 0.5em 0 0;
-    margin-bottom: -0.3m;
-    width: 48px;
-    display: inline; }
+    margin-bottom: -0.3em;
+    display: inline;
+    width: 16px; }
   .references .reference {
     margin-bottom: 1em; }
 
 .footnotes, .references {
-  line-height: 100%; }
+  font-size: 70%;
+  line-height: 120%; }
 
 h1 {
   page-break-inside: avoid; }

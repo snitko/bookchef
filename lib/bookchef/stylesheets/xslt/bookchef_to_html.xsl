@@ -16,6 +16,7 @@
       <head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <link href="{$gem_path}/stylesheets/css/default.css" rel="stylesheet" type="text/css"/>
+        <xsl:copy-of select="/book/settings/*"/>
       </head>
       <xsl:apply-templates select="@* | node()" />
     </html>
@@ -26,6 +27,9 @@
     <body>
       <xsl:apply-templates select="@* |node()" />
     </body>
+  </xsl:template>
+
+  <xsl:template match="/book/settings">
   </xsl:template>
 
 

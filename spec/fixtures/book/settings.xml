@@ -1,0 +1,8 @@
+<settings>
+
+  <meta name="pdfkit-margin_top" content="0.5in"/>
+  <meta name="pdfkit-margin_right" content="0.3in"/>
+  <meta name="pdfkit-margin_bottom" content="0.5in"/>
+  <meta name="pdfkit-margin_left" content="0.8in"/>
+
+</settings>

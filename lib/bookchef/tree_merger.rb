@@ -11,6 +11,10 @@ class BookChef
       @filename = fn
       @document = File.read("#@path/#@filename").gsub(/<%(.*?)%>/, '&lt;%\1%&gt;')
       @document = Nokogiri::XML.parse @document
+      if File.exists?("#@path/settings.xml")
+        @settings = File.read("#@path/settings.xml") 
+        @document.root << @settings
+      end
     end
 
     def run
