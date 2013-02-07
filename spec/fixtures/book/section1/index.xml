@@ -1,6 +1,9 @@
 <section>
   <title>Some section</title>
   <p>hello world</p>
+  <term reference="1">reference link as a term</term>
+  <term footnote="1">footnote link as a term</term>
+  <term>this is a term</term>
   <section src="subsection.xml">Subsection title</section>
   <section src="supersubsection"/>
 

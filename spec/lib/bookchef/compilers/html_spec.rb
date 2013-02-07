@@ -15,7 +15,7 @@ describe BookChef::Compiler::HTML do
     converted_html = Nokogiri::XML.parse File.new("#@book_dir/html_converted.html")
     expected_html  = File.read("#@book_dir/html_expected.html").gsub('#{gem_path}', BookChef::LIB_PATH)
     expected_html  = Nokogiri::XML.parse expected_html
-    File.unlink    "#{@book_dir}/html_converted.html"
+    #File.unlink    "#{@book_dir}/html_converted.html"
 
     converted_html.should be_equivalent_to(expected_html)
   end

@@ -1,4 +1,4 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exslt="http://exslt.org/common">
   <xsl:output indent="yes" omit-xml-declaration="yes"/>
 
   <xsl:param name="gem_path">#{gem_path}</xsl:param>
@@ -10,23 +10,15 @@
     </xsl:copy>
   </xsl:template>
 
-
-  <xsl:template match="/">
+  <xsl:template match="/book">
     <html>
       <head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <link href="{$gem_path}/stylesheets/css/default.css" rel="stylesheet" type="text/css"/>
         <xsl:copy-of select="/book/settings/*"/>
       </head>
-      <xsl:apply-templates select="@* | node()" />
+      <body><xsl:apply-templates select="@* | node()" /></body>
     </html>
-  </xsl:template>
-
-
-  <xsl:template match="book">
-    <body>
-      <xsl:apply-templates select="@* |node()" />
-    </body>
   </xsl:template>
 
   <xsl:template match="/book/settings">
@@ -80,23 +72,6 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="*[@reference]">
-    <xsl:param name="href" select="./@reference"/>
-    <span class="referenceSelection">
-      <xsl:value-of select="."/>
-      <xsl:text> </xsl:text><a href="#{$href}">[<xsl:value-of select="./@number"/>]</a>
-    </span>
-  </xsl:template>
-
-
-  <xsl:template match="*[@footnote]">
-    <xsl:param name="href" select="./@footnote"/>
-    <span class="footnoteSelection">
-      <xsl:value-of select="."/>
-      <a href="#{$href}"><sup><xsl:value-of select="./@number"/></sup></a>
-    </span>
-  </xsl:template>
-
   <xsl:template match="reference">
     <xsl:param name="id"   select="./@id"/>
     <xsl:param name="type" select="./@type"/>
@@ -115,15 +90,15 @@
     </xsl:element>
   </xsl:template>
 
-  <xsl:template match="code-inline">
+  <xsl:template match="code-inline" >
     <span class="code inline"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
 
-  <xsl:template match="name">
+  <xsl:template match="name" >
     <span class="name"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
 
-  <xsl:template match="filename">
+  <xsl:template match="filename" >
     <span class="filename"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
 
@@ -131,6 +106,58 @@
     <xsl:param name="href" select="./@href"/>
     <xsl:variable name="name"><xsl:value-of select='translate($href, "#", "")'/></xsl:variable>
     <a href="{$href}"><xsl:value-of select="//*[@id=$name]/title"/></a>
+  </xsl:template>
+
+  <xsl:template match="term" name="term">
+    <i><xsl:apply-templates select="@* |node()"/></i>
+  </xsl:template>
+
+  <xsl:template match="*[@reference]" >
+    <xsl:param name="href" select="./@reference"/>
+    <xsl:choose>
+
+      <xsl:when test="name() = 'span'">
+        <span class="referenceSelection">
+          <xsl:value-of select="."/>
+        </span>
+      </xsl:when>
+
+      <xsl:otherwise>
+        <xsl:variable name="reference_content">
+          <xsl:element name="{name()}">
+            <xsl:value-of select="."/>
+          </xsl:element>
+        </xsl:variable>
+        <xsl:apply-templates select="exslt:node-set($reference_content)"/>
+      </xsl:otherwise>
+
+    </xsl:choose>
+
+    <xsl:text> </xsl:text><a href="#{$href}">[<xsl:value-of select="./@number"/>]</a>
+
+  </xsl:template>
+
+  <xsl:template match="*[@footnote]" >
+    <xsl:param name="href" select="./@footnote"/>
+
+    <xsl:choose>
+      <xsl:when test="name() = 'span'">
+        <span class="footnoteSelection">
+          <xsl:value-of select="."/>
+        </span>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="footnote_content">
+          <xsl:element name="{name()}">
+            <xsl:value-of select="."/>
+          </xsl:element>
+        </xsl:variable>
+        <xsl:apply-templates select="exslt:node-set($footnote_content)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
+    <a href="#{$href}"><sup><xsl:value-of select="./@number"/></sup></a>
+
   </xsl:template>
 
 </xsl:stylesheet>
