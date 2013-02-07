@@ -94,6 +94,11 @@ p.frameDescription {
   margin-top: 0.5em;
   text-indent: 0px; }
 
+.cover {
+  page-break-after: always; }
+  .cover img {
+    width: 100%; }
+
 .tableOfContents {
   page-break-after: always;
   font-size: 120%; }

@@ -18,6 +18,7 @@
         <xsl:copy-of select="/book/settings/*"/>
       </head>
       <body>
+        <xsl:apply-templates select="cover" mode="cover" />
         <div class="tableOfContents">
           <h2>Содержание</h2>
           <ul><xsl:apply-templates select="chapter" mode="table_of_contents" /></ul>
@@ -25,6 +26,12 @@
         <xsl:apply-templates select="@* | node()" />
       </body>
     </html>
+  </xsl:template>
+
+  <xsl:template match="cover" mode="cover">
+    <div class="cover"><xsl:apply-templates select="@* | node()" /></div>
+  </xsl:template>
+  <xsl:template match="cover">
   </xsl:template>
 
   <xsl:template match="/book/settings">

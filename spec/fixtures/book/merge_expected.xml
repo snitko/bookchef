@@ -9,6 +9,8 @@
 
   </settings>
 
+  <cover><img src="#{source_path}/cover.png"/></cover>
+
   <chapter id="/section1/index.xml">
 
     <title>Chapter 1 Title</title>

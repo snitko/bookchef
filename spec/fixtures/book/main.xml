@@ -1,4 +1,7 @@
 <book>
+
+  <cover><img src="cover.png"/></cover>
+
   <chapter src="section1">Chapter 1 Title</chapter>
   <chapter>
     <title>Chapter 2 Title</title>
