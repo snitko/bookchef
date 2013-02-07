@@ -110,3 +110,17 @@ ul, ol {
   margin-left: 2em; }
   ul li, ol li {
     margin: 0.5em 0; }
+
+.footer {
+  border-top: solid 1px #cccccc;
+  paddign-top: 1em;
+  font-size: 80%; }
+  .footer .text {
+    float: left;
+    width: 80%;
+    color: #aaa; }
+  .footer .info {
+    float: right;
+    width: 20%;
+    text-align: right;
+    font-weight: bold; }

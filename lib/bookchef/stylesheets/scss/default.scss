@@ -65,3 +65,10 @@ ul, ol {
   margin-left: 2em;
   li { margin: 0.5em 0; }
 }
+
+.footer {
+  border-top: solid 1px #ccc;
+  paddign-top: 1em; font-size: 80%;
+  .text { float: left; width: 80%; color: #aaa; }
+  .info { float: right; width: 20%; text-align: right; font-weight: bold; }
+}
