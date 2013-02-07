@@ -94,6 +94,14 @@ p.frameDescription {
   margin-top: 0.5em;
   text-indent: 0px; }
 
+.tableOfContents {
+  page-break-after: always;
+  font-size: 120%; }
+  .tableOfContents ul {
+    list-style-type: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0; }
+
 table {
   margin: 1.5em 1em;
   page-break-inside: avoid;

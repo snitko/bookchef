@@ -1,5 +1,5 @@
 <book>
-  <chapter src="section1">Section Title</chapter>
+  <chapter src="section1">Chapter 1 Title</chapter>
   <chapter>
     <title>Chapter 2 Title</title>
   </chapter>

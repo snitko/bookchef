@@ -17,19 +17,24 @@
         <link href="{$gem_path}/stylesheets/css/default.css" rel="stylesheet" type="text/css"/>
         <xsl:copy-of select="/book/settings/*"/>
       </head>
-      <body><xsl:apply-templates select="@* | node()" /></body>
+      <body>
+        <div class="tableOfContents">
+          <h2>Содержание</h2>
+          <ul><xsl:apply-templates select="chapter" mode="table_of_contents" /></ul>
+        </div>
+        <xsl:apply-templates select="@* | node()" />
+      </body>
     </html>
   </xsl:template>
 
   <xsl:template match="/book/settings">
   </xsl:template>
 
-
   <xsl:template match="section/title">
     <h1><xsl:value-of select="." /></h1>
   </xsl:template>
   <xsl:template match="chapter/title">
-    <h1>Глава <xsl:number count="chapter"/>: <xsl:value-of select="." /></h1>
+    <h1>Глава <xsl:number count="chapter"/>. <xsl:value-of select="." /></h1>
   </xsl:template>
 
   <xsl:template match="li/title">
@@ -42,6 +47,9 @@
     </div>
   </xsl:template>
 
+  <xsl:template match="chapter" mode="table_of_contents">
+    <li>Глава <xsl:number count="chapter"/>. <a href="#{@id}"><xsl:value-of select="./title"/></a></li> 
+  </xsl:template>
 
   <xsl:template match="section">
     <div class="section">
