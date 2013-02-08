@@ -76,6 +76,8 @@ ul, ol {
   li { margin: 0.5em 0; }
 }
 
+sup {	height: 0; line-height: 1; vertical-align: baseline; _vertical-align: bottom; position: relative; bottom: 1ex; }
+
 .footer {
   border-top: solid 1px #ccc;
   paddign-top: 1em; font-size: 80%;
