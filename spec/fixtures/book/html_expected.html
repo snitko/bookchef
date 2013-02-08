@@ -23,15 +23,16 @@
       </ul>
     </div>
 
-    <div class="chapter" id="/section1/index.xml">
+    <div class="chapter">
 
-      <h1>Глава 1. Chapter 1 Title</h1>
+      <h1 id="/section1/index.xml">Глава 1. Chapter 1 Title</h1>
       <p>hello world</p>
+      <a href="http://google.com">Reference 1 text</a>
       <i>reference link as a term</i> <a href="#/section1/index.xml/reference_1">[1]</a>
       <i>footnote link as a term</i><a href="#/section1/index.xml/footnote_1"><sup>1</sup></a>
       <i>this is a term</i>
-      <div class="section" id="/section1/subsection.xml">
-        <h1>Subsection title</h1>
+      <div class="section">
+        <h1 id="/section1/subsection.xml">Subsection title</h1>
         <a href="#/main.xml">Link to the root</a>
         <a href="#/hello/index.xml">Link to the root</a>
 
@@ -62,10 +63,10 @@
 
       </div>
 
-      <div class="section" id="/section1/supersubsection/index.xml">
-        <h1>SuperSubSection index</h1>
-        <div class="section" id="/section1/supersubsection/hello.xml">
-          <h1>SuperSubSection hello</h1>
+      <div class="section">
+        <h1 id="/section1/supersubsection/index.xml">SuperSubSection index</h1>
+        <div class="section">
+          <h1 id="/section1/supersubsection/hello.xml">SuperSubSection hello</h1>
           <span class="referenceSelection">a supersubsection reference link</span> <a href="#/section1/supersubsection/index.xml/reference_1">[1]</a>
         </div>
         <div class="references">
@@ -86,7 +87,7 @@
 
     </div>
 
-    <div class="chapter"><h1>Глава 2. Chapter 2 Title</h1></div>
+    <div class="chapter"><h1 id="">Глава 2. Chapter 2 Title</h1></div>
     <p>Some other tag</p>
 
   </body>

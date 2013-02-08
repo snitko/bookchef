@@ -20,7 +20,7 @@ p {
   text-indent: 1em;
   text-align: justify; }
 
-span.name, span.filename {
+span.name, span.filename, span.keyboard {
   font-family: "Monaco";
   font-size: 80%; }
 

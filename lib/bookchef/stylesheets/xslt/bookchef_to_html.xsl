@@ -38,10 +38,10 @@
   </xsl:template>
 
   <xsl:template match="section/title">
-    <h1><xsl:value-of select="." /></h1>
+    <h1 id="{../@id}"><xsl:value-of select="." /></h1>
   </xsl:template>
   <xsl:template match="chapter/title">
-    <h1>Глава <xsl:number count="chapter"/>. <xsl:value-of select="." /></h1>
+    <h1 id="{../@id}">Глава <xsl:number count="chapter"/>. <xsl:value-of select="." /></h1>
   </xsl:template>
 
   <xsl:template match="li/title">
@@ -53,6 +53,8 @@
       <xsl:apply-templates select="@* |node()" />
     </div>
   </xsl:template>
+  <xsl:template match="chapter/@id">
+  </xsl:template>
 
   <xsl:template match="chapter" mode="table_of_contents">
     <li>Глава <xsl:number count="chapter"/>. <a href="#{@id}"><xsl:value-of select="./title"/></a></li> 
@@ -62,6 +64,8 @@
     <div class="section">
       <xsl:apply-templates select="@* |node()" />
     </div>
+  </xsl:template>
+  <xsl:template match="section/@id">
   </xsl:template>
 
 
@@ -98,11 +102,16 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="code|table">
+  <xsl:template match="code">
     <p class="frameDescription"><xsl:value-of select="./@description"/><xsl:text> </xsl:text></p>
     <xsl:element name="{name()}">
       <xsl:copy-of select="./node()"/>
     </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="table">
+    <p class="frameDescription"><xsl:value-of select="./@description"/><xsl:text> </xsl:text></p>
+    <table><xsl:apply-templates select="./node()" /></table>
   </xsl:template>
 
   <xsl:template match="code-inline" >
@@ -117,10 +126,26 @@
     <span class="filename"><xsl:apply-templates select="@* |node()" /></span>
   </xsl:template>
 
+  <xsl:template match="keyboard" >
+    <span class="keyboard"><xsl:apply-templates select="@* |node()" /></span>
+  </xsl:template>
+
   <xsl:template match="a[not(node())]">
-    <xsl:param name="href" select="./@href"/>
-    <xsl:variable name="name"><xsl:value-of select='translate($href, "#", "")'/></xsl:variable>
-    <a href="{$href}"><xsl:value-of select="//*[@id=$name]/title"/></a>
+    <xsl:param name="href"      select="./@href"/>
+    <xsl:param name="reference" select="./@reference"/>
+
+    <xsl:choose>
+      <xsl:when test="$href != ''">
+        <xsl:variable name="name"><xsl:value-of select='translate($href, "#", "")'/></xsl:variable>
+        <a href="{$href}"><xsl:value-of select="//*[@id=$name]/title"/></a>
+      </xsl:when>
+      <xsl:when test="$reference != ''">
+        <xsl:variable name="title"><xsl:value-of select='//reference[@id=$reference]'/></xsl:variable>
+        <xsl:variable name="url"><xsl:value-of select='//reference[@id=$reference]/@url'/></xsl:variable>
+        <a href="{$url}"><xsl:value-of select="$title"/></a>
+      </xsl:when>
+    </xsl:choose>
+
   </xsl:template>
 
   <xsl:template match="term" name="term">

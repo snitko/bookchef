@@ -11,7 +11,7 @@ code { display: block; clear: both; margin: 1em 0; padding: 0.5em; white-space: 
 }
 
 p { margin: 0 0 0 0; text-indent: 1em; text-align: justify; }
-span.name, span.filename { font-family: "Monaco"; font-size: 80%; }
+span.name, span.filename, span.keyboard { font-family: "Monaco"; font-size: 80%; }
 img { clear: both; display: block; margin: 2em 1em; width: 80%; page-break-inside: avoid; }
 
 .footnotes  {

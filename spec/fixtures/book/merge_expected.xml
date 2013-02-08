@@ -15,6 +15,7 @@
 
     <title>Chapter 1 Title</title>
     <p>hello world</p>
+    <a reference="/section1/index.xml/reference_1" number="1"/>
     <term reference="/section1/index.xml/reference_1" number="1">reference link as a term</term>
     <term footnote="/section1/index.xml/footnote_1" number="1">footnote link as a term</term>
     <term>this is a term</term>
