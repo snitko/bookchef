@@ -33,7 +33,7 @@
       <code description="a description of this code">&amp;lt;%= link_to %&amp;gt;&lt;a href="hi"&gt;
   &lt;img src="hello.png"/&gt;
 &lt;/a&gt;</code>
-      <code>puts "some ruby code"
+      <code>puts "some ruby code" #ampersand;#ampersand;
   puts "some more ruby code"
     puts "even more ruby code"
       puts "A ruby is a pink to blood-red colored gemstone, a

@@ -49,7 +49,10 @@ class BookChef
           assign_id_to_section! s, full_current_path
           
           # Parse the sourced file
-          sourced_document = Nokogiri::XML.parse(File.read("#@path#{full_current_path}").gsub(/<%(.*?)%>/, '&lt;%\1%&gt;'))
+          level_file = File.read("#@path#{full_current_path}")
+          level_file.gsub!(/<%(.*?)%>/, '&lt;%\1%&gt;')
+          level_file.gsub!(/&&/, '#ampersand;#ampersand;')
+          sourced_document = Nokogiri::XML.parse(level_file)
           convert_references_and_footnotes! sourced_document, full_current_path
 
           # Now process it too, replacing all src-s with xml from sourced files

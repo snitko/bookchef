@@ -17,6 +17,7 @@ class BookChef
         @result = @document.serve
         @result.gsub!("&amp;lt;", "&lt;")
         @result.gsub!("&amp;gt;", "&gt;")
+        @result.gsub!("#ampersand;", "&amp;")
       end
 
       def save_to(fn)
