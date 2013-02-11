@@ -15,7 +15,7 @@ doc
 .bundle
 
 # jeweler generated
-pkg
+#pkg
 
 # For MacOS:
 #
