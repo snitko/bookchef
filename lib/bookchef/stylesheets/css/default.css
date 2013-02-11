@@ -135,7 +135,8 @@ sup {
 .footer {
   border-top: solid 1px #cccccc;
   paddign-top: 1em;
-  font-size: 80%; }
+  font-size: 80%;
+  line-height: 100%; }
   .footer .text {
     float: left;
     width: 80%;
