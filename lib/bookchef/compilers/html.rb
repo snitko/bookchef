@@ -14,10 +14,7 @@ class BookChef
       end
 
       def run
-        @result = @document.serve
-        @result.gsub!("&amp;lt;", "&lt;")
-        @result.gsub!("&amp;gt;", "&gt;")
-        @result.gsub!("#ampersand;", "&amp;")
+        @result = BookChef.decode_special_chars(@document.serve)
       end
 
       def save_to(fn)

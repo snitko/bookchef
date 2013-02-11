@@ -1,6 +1,4 @@
 require "spec_helper"
-require "equivalent-xml"
-require "nokogiri/diff"
 
 describe BookChef::Compiler::HTML do
 
@@ -14,13 +12,12 @@ describe BookChef::Compiler::HTML do
     converter.run
     converter.save_to("#@book_dir/html_converted.html")
 
-    converted_html = Nokogiri::XML.parse File.new("#@book_dir/html_converted.html")
+    converted_html = File.read("#@book_dir/html_converted.html")
     expected_html  = File.read("#@book_dir/html_expected.html").gsub('#{gem_path}', BookChef::LIB_PATH).gsub('#{source_path}', "file://#@book_dir")
-    expected_html  = Nokogiri::XML.parse expected_html
 
     File.unlink    "#{@book_dir}/html_converted.html"
 
-    converted_html.should be_equivalent_to(expected_html)
+    converted_html.should == expected_html
   end
 
 end

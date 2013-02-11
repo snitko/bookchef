@@ -5,7 +5,7 @@
   <section src="hello.xml"/>
 
   <references>
-    <reference id="1" type="manual" url="http://google.com">a supersubsection reference</reference>
+    <reference id="1" type="manual" url="https://google.com">a supersubsection reference</reference>
   </references>
 
 </section>

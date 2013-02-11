@@ -16,7 +16,8 @@
     <title>Chapter 1 Title</title>
     <p>hello world</p>
     <a reference="/section1/index.xml/reference_1" number="1"/>
-    <term reference="/section1/index.xml/reference_1" number="1">reference link as a term</term>
+    <a href="https://google.com">Google</a>
+    <term reference="/section1/index.xml/reference_1" number="1">reference - link as a term</term>
     <term footnote="/section1/index.xml/footnote_1" number="1">footnote link as a term</term>
     <term>this is a term</term>
     <section id="/section1/subsection.xml">
@@ -30,10 +31,11 @@
       <p><a href="#/hello/world.xml">Link to the root</a></p>
       <span footnote="/section1/index.xml/footnote_1" number="1">Footnote 1</span>
       <span reference="/section1/index.xml/reference_1" number="1">Reference 1</span>
-      <code description="a description of this code">&amp;lt;%= link_to %&amp;gt;&lt;a href="hi"&gt;
+      <code description="a description of this code">#lt;%= link_to %#gt;&lt;a href="hi"&gt;
   &lt;img src="hello.png"/&gt;
 &lt;/a&gt;</code>
-      <code>puts "some ruby code" #ampersand;#ampersand;
+      <code>puts 2 - 1
+puts "some ruby code" #amp;#amp; #lt;
   puts "some more ruby code"
     puts "even more ruby code"
       puts "A ruby is a pink to blood-red colored gemstone, a
@@ -56,7 +58,7 @@
         <span reference="/section1/supersubsection/index.xml/reference_1" number="1">a supersubsection reference link</span>
       </section>
       <references>
-        <reference id="/section1/supersubsection/index.xml/reference_1" type="manual" url="http://google.com">a supersubsection reference</reference>
+        <reference id="/section1/supersubsection/index.xml/reference_1" type="manual" url="https://google.com">a supersubsection reference</reference>
       </references>
     </section>
 

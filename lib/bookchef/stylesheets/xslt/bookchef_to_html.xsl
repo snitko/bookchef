@@ -10,6 +10,39 @@
     </xsl:copy>
   </xsl:template>
 
+ <xsl:template name="string-replace-all">
+    <xsl:param name="text" />
+    <xsl:param name="replace" />
+    <xsl:param name="by" />
+    <xsl:choose>
+      <xsl:when test="contains($text, $replace)">
+        <xsl:value-of select="substring-before($text,$replace)" />
+        <xsl:value-of select="$by" />
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text" select="substring-after($text,$replace)" />
+          <xsl:with-param name="replace" select="$replace" />
+          <xsl:with-param name="by" select="$by" />
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="text()">
+    <xsl:variable name="mdash"><xsl:text disable-output-escaping="yes"> <![CDATA[#mdash;]]> </xsl:text></xsl:variable>
+    <xsl:call-template name="string-replace-all">
+      <xsl:with-param name="text" select="." />
+      <xsl:with-param name="replace" select='" - "'/>
+      <xsl:with-param name="by" select='$mdash' />
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="a/@href">
+    <xsl:attribute name="{name()}"><xsl:value-of select='translate(., "https", "http")'/></xsl:attribute>
+  </xsl:template>
+
   <xsl:template match="/book">
     <html>
       <head>
@@ -68,7 +101,9 @@
   <xsl:template match="section/@id">
   </xsl:template>
 
-
+  <xsl:template match="pagebreak">
+    <div class="insertPageBreak"></div>
+  </xsl:template>
 
   <xsl:template match="footnotes">
     <div class="footnotes">
@@ -98,7 +133,7 @@
     <div class="reference" id="{$id}">
       <img src="{$gem_path}/images/{$type}_link.png" />
       [<xsl:number count="reference" level="single"/>]<xsl:text> </xsl:text>
-      <a href="{$url}"><xsl:value-of select="."/></a>
+      <a href="{translate($url, 'https', 'http')}"><xsl:value-of select="."/></a>
     </div>
   </xsl:template>
 

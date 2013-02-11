@@ -50,8 +50,7 @@ class BookChef
           
           # Parse the sourced file
           level_file = File.read("#@path#{full_current_path}")
-          level_file.gsub!(/<%(.*?)%>/, '&lt;%\1%&gt;')
-          level_file.gsub!(/&&/, '#ampersand;#ampersand;')
+          level_file = BookChef.protect_special_chars(level_file)
           sourced_document = Nokogiri::XML.parse(level_file)
           convert_references_and_footnotes! sourced_document, full_current_path
 
@@ -70,7 +69,7 @@ class BookChef
       def convert_links!(document, current_path)
         document.search("a").each do |link|
 
-          next if link[:href].nil? || link[:href] =~ /\Ahttp:\/\//
+          next if link[:href].nil? || link[:href] =~ /\Ahttps?:\/\//
           link_path_arr    = link[:href].split("/")
           current_path_arr = current_path.split("/").reject { |i| i.empty? }
           uplevels_count   = (link_path_arr.map { |i| i if i == ".." }).compact.size
