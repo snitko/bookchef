@@ -1,6 +1,6 @@
 <book>
 
-  <cover><img src="cover.png"/></cover>
+  <cover><img src="cover.png"/><InsertBookVersion/></cover>
 
   <chapter src="section1">Chapter 1 Title</chapter>
   <chapter>

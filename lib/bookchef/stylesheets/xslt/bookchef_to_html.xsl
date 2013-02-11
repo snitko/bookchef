@@ -56,7 +56,7 @@
           <h2>Содержание</h2>
           <ul><xsl:apply-templates select="chapter" mode="table_of_contents" /></ul>
         </div>
-        <xsl:apply-templates select="@* | node()" />
+        <xsl:apply-templates select="node()" />
       </body>
     </html>
   </xsl:template>
@@ -65,6 +65,10 @@
     <div class="cover"><xsl:apply-templates select="@* | node()" /></div>
   </xsl:template>
   <xsl:template match="cover">
+  </xsl:template>
+
+  <xsl:template match="InsertBookVersion">
+    <xsl:value-of select="/book/@version" />
   </xsl:template>
 
   <xsl:template match="/book/settings">

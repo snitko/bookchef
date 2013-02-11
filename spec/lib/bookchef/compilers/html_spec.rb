@@ -8,6 +8,7 @@ describe BookChef::Compiler::HTML do
 
   it "converts xml tags into html" do
     source_xml = File.read("#@book_dir/merge_expected.xml").gsub('#{source_path}', "file://#@book_dir")
+    source_xml.gsub!("<book>", "<book version=\"1.0.0\">")
     converter  = BookChef::Compiler::HTML.new(source_xml)
     converter.run
     converter.save_to("#@book_dir/html_converted.html")

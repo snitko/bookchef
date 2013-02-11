@@ -11,6 +11,7 @@ class BookChef
       @filename = fn
       @document = File.read("#@path/#@filename").gsub(/<%(.*?)%>/, '&lt;%\1%&gt;')
       @document = Nokogiri::XML.parse @document
+      insert_version_from_git_tag!
       if File.exists?("#@path/settings.xml")
         @settings = File.read("#@path/settings.xml") 
         @document.root << @settings
@@ -171,6 +172,12 @@ class BookChef
           return "#{line1}\n#{line2}"
         else
           line
+        end
+      end
+
+      def insert_version_from_git_tag!
+        `cd #{@path} && git tag`.split("\n").each do |t|
+          @document.root["version"] = t.sub(/\Av/,'').rstrip and return if t =~ /\Av[0-9]/
         end
       end
 
