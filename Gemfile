@@ -15,6 +15,6 @@ group :development do
   gem 'nokogiri-diff'
 end
 
-gem "pdfkit"
+gem "pdfkit", "0.5.0"
 gem "nokogiri"
 gem "ruby-xslt"
