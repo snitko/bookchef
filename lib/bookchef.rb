@@ -29,6 +29,10 @@ class BookChef
       s.gsub(/#([a-zA-Z0-9#]*?);/, '&\1;')
     end
 
+    def replace_https_with_http(s)
+      s.gsub('href="https://', 'href="http://')
+    end
+
   end
 
 end

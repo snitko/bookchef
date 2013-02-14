@@ -39,10 +39,6 @@
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="a/@href">
-    <xsl:attribute name="{name()}"><xsl:value-of select='translate(., "https", "http")'/></xsl:attribute>
-  </xsl:template>
-
   <xsl:template match="/book">
     <html>
       <head>
@@ -137,7 +133,7 @@
     <div class="reference" id="{$id}">
       <img src="{$gem_path}/images/{$type}_link.png" />
       [<xsl:number count="reference" level="single"/>]<xsl:text> </xsl:text>
-      <a href="{translate($url, 'https', 'http')}"><xsl:value-of select="."/></a>
+      <a href="{$url}"><xsl:value-of select="."/></a>
     </div>
   </xsl:template>
 

@@ -67,7 +67,7 @@ puts "some ruby code" #amp;#amp; #lt;
     </footnotes>
 
     <references>
-      <reference id="/section1/index.xml/reference_1" type="manual" url="http://google.com">Reference 1 text</reference>
+      <reference id="/section1/index.xml/reference_1" type="manual" url="http://hasbrains.ru">Reference 1 text</reference>
     </references>
 
   </chapter>

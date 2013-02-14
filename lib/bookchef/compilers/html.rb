@@ -15,6 +15,7 @@ class BookChef
 
       def run
         @result = BookChef.decode_special_chars(@document.serve)
+        @result = BookChef.replace_https_with_http(@result)
       end
 
       def save_to(fn)
