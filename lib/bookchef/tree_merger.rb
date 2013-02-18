@@ -176,6 +176,9 @@ class BookChef
       end
 
       def insert_version_from_git_tag!
+        v = `cd #{@path} && git tag`.split("\n").sort.reverse
+        File.open("/home/roman/Desktop/v.txt", "w") { |f| f.write v }
+
         `cd #{@path} && git tag`.split("\n").sort.reverse.each do |t|
           if t =~ /\Av[0-9]/
             @version = t.sub(/\Av/,'').rstrip
