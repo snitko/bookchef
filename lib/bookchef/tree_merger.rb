@@ -2,7 +2,7 @@ class BookChef
 
   class TreeMerger
 
-    attr_reader :document
+    attr_reader :document, :version
 
     class LinkLevelOutOfReach < Exception; end
 
@@ -177,7 +177,11 @@ class BookChef
 
       def insert_version_from_git_tag!
         `cd #{@path} && git tag`.split("\n").reverse.each do |t|
-          @document.root["version"] = t.sub(/\Av/,'').rstrip and return if t =~ /\Av[0-9]/
+          if t =~ /\Av[0-9]/
+            @version = t.sub(/\Av/,'').rstrip
+            @document.root["version"] = t.sub(/\Av/,'').rstrip
+            return
+          end
         end
       end
 
