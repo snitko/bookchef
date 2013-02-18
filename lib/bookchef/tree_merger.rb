@@ -176,7 +176,7 @@ class BookChef
       end
 
       def insert_version_from_git_tag!
-        `cd #{@path} && git tag`.split("\n").reverse.each do |t|
+        `cd #{@path} && git tag`.split("\n").sort.reverse.each do |t|
           if t =~ /\Av[0-9]/
             @version = t.sub(/\Av/,'').rstrip
             @document.root["version"] = t.sub(/\Av/,'').rstrip

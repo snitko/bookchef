@@ -20,7 +20,7 @@ class BookChef
 
       def save_to(fn)
         f = File.open(fn, "w")
-        f.write @result
+        f.write @result 
         f.close
       end
 
