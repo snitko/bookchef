@@ -17,7 +17,7 @@ Now a `bookchef` command is available on your system. Type it to see a short sum
 Bookchef XML basics
 -------------------
 
-Once I decided to write a book. I didn't want to use any propritary software -- I wanted to use git, my text-editor and a simple xml format (and I mean, really simple) that you can write by hand, so that later I could maybe build some kind of gui-editor around it. In order to make git useful, I realized that each chapter and each section of the chapter should be in a separate file and a seperate directory. Thus we have `<chapter>` and `<section>` tags, each may or may not have an `src=` attribute. Here's an example:
+Once I decided to write a book. I didn't want to use any proprietary software -- I wanted to use git, my text-editor and a simple xml format (and I mean, really simple) that you can write by hand, so that later I could maybe build some kind of gui-editor around it. In order to make git useful, I realized that each chapter and each section of the chapter should be in a separate file and a seperate directory. Thus we have `<chapter>` and `<section>` tags, each may or may not have an `src=` attribute. Here's an example:
 
     <book>
       <chapter>
@@ -37,16 +37,23 @@ Within the book, you may use various elements, listed below:
 
 + `<title>` may appear once within a chapter or a section, but doesn't have to. While compiling, each chapter automatically gets a number before its title
 + `<code-inline>` allows you to include an inline code
-+ `<code>` allow a multi-line block of code. Remember that within it other tags don't work.
++ `<code>` allows a multi-line block of code. Remember that within it other tags don't work
 + `<p>` is self-exlpanatory
-+ `<term>` - wrap a term with it, with standard styles used by compiler the text will appear in italics.
++ `<term>` - wrap a term with it (with standard styles used by compiler the text will appear in italics)
 + `<filename>` is used to indicate either a filename or a url (when it's not supposed to be clicked, for example in the case of http://localhost:3000)
 
 Then we also have two special blocks that may appear at the bottom of each section, which are called `<references>` and `<footnotes>`. Here's how it may look:
 
     <section>
       <title>Minimum wage: why it doesn't work</title>
-      <p><span reference="1">Minimum wage</span> doesn't work because people getting jobs for this wage are doing so at the expense of all others who didn't get the same job, when employers were either unable to pay for that many employees or simply went out of business. Or, they may indeed comply with the law and hire just the same number of employees, in which case they simply <span footnote="1">redistribute these costs on their customers</footnote>, who then redistribute these costs on their employers demanding more pay and the circle continues. This circle inevitably causes <span footnote="2">either inflation or loss of demand</span>. Thus, minimum wage always has its costs, but those costs are not payed by people who are expected to pay.</p>
+      <p><span reference="1">Minimum wage</span> doesn't work because people getting jobs for this wage
+      are doing so at the expense of all others who didn't get the same job, when employers were either
+      unable to pay for that many employees or simply went out of business. Or, they may indeed comply
+      with the law and hire just the same number of employees, in which case they simply <span footnote="1">redistribute these costs on their customers</footnote>,
+      who then redistribute these costs on their employers demanding more pay and the circle continues.
+      This circle inevitably causes <span footnote="2">either inflation or loss of demand</span>.
+      Thus, minimum wage always has its costs, but those costs are not payed by people who are expected to pay.
+      </p>
       
       <footnotes>
         <footnote id="1">By raising prices</footnote>
@@ -119,7 +126,7 @@ Same steps can be achieved with Ruby code:
 
 Customizable styles and compiling to different formats
 ------------------------------------------------------
-There to directories that you might be interested in to customize the output. First, there's a `lib/bookchef/stylesheets/scss` where you may find a `default.scss` file. This file determines, obviously, what the HTML output will look like in a browser (use `rake compile_css` to create a correposnding css in `lib/bookchef/stylesheets/css`.
+There are two directories that you might be interested in to customize the output. First, there's a `lib/bookchef/stylesheets/scss` where you may find a `default.scss` file. This file determines, obviously, what the HTML output will look like in a browser (use `rake compile_css` to create a correposnding css in `lib/bookchef/stylesheets/css`.
 
 To tell compiler which css file to use you'd need to create a new xslt-stylesheet in `lib/bookchef/stylesheets/xslt`. Just copy the default one, find the part where it creates a stylesheet link tag and change the css filename. Then you can tell compiler to use your xslt instead of a default one:
 
