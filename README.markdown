@@ -61,7 +61,7 @@ Then we also have two special blocks that may appear at the bottom of each secti
   
   As you can see, we referenced both footnotes and references by wrapping some text in `<span>` tags and using either a `footnote=` or `reference=` attributes. In fact, you can add those attributes to other tags, not just `<span>`, but also `<term>` or `<filename>`. It will look like this when compiled:
   
-  ![bookchef_compiled_example](https://github.com/snitko/frontend_notifier/raw/master/bookchef_compiled_example.png)
+  ![bookchef_compiled_example](https://github.com/snitko/bookchef/raw/master/bookchef_compiled_example.png)
   
   Of course, readers are able to click the links and go straight to the footnote or the reference they chose.
   
