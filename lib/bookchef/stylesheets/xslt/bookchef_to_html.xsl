@@ -31,7 +31,7 @@
   </xsl:template>
 
   <xsl:template match="text()">
-    <xsl:variable name="mdash"><xsl:text disable-output-escaping="yes"> <![CDATA[#mdash;]]> </xsl:text></xsl:variable>
+    <xsl:variable name="mdash"><xsl:text disable-output-escaping="yes"><![CDATA[#mdash;]]></xsl:text></xsl:variable>
     <xsl:call-template name="string-replace-all">
       <xsl:with-param name="text" select="." />
       <xsl:with-param name="replace" select='" - "'/>
@@ -49,7 +49,7 @@
       <body>
         <xsl:apply-templates select="cover" mode="cover" />
         <div class="tableOfContents">
-          <h2>Содержание</h2>
+          <h2>Table of contents</h2>
           <ul><xsl:apply-templates select="chapter" mode="table_of_contents" /></ul>
         </div>
         <xsl:apply-templates select="node()" />
@@ -74,7 +74,7 @@
     <h1 id="{../@id}"><xsl:value-of select="." /></h1>
   </xsl:template>
   <xsl:template match="chapter/title">
-    <h1 id="{../@id}">Глава <xsl:number count="chapter"/>. <xsl:value-of select="." /></h1>
+    <h1 id="{../@id}">Chapter <xsl:number count="chapter"/>. <xsl:value-of select="." /></h1>
   </xsl:template>
 
   <xsl:template match="li/title">
@@ -90,7 +90,7 @@
   </xsl:template>
 
   <xsl:template match="chapter" mode="table_of_contents">
-    <li>Глава <xsl:number count="chapter"/>. <a href="#{@id}"><xsl:value-of select="./title"/></a></li> 
+    <li>Chapter <xsl:number count="chapter"/>. <a href="#{@id}"><xsl:value-of select="./title"/></a></li> 
   </xsl:template>
 
   <xsl:template match="section">
